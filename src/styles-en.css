@@ -1,0 +1,33 @@
+.left_side_nav {
+  width: 120px;
+  min-height: 100vh;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  border-right: 1px solid var(--main-color);
+}
+.right_side_nav {
+  width: 370px;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+  background: #cdebeb url("./assets/images/shape.png") repeat-y 50% 0;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+.home_page_content {
+  margin-top: 97px;
+  margin-left: 120px;
+  margin-right: 370px;
+  padding: 30px;
+}
+.navbar_header {
+  margin-left: 120px;
+}
+.navbar_wrapper {
+  padding-right: 30px !important;
+}

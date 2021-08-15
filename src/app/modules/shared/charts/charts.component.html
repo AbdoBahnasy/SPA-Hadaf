@@ -1,0 +1,38 @@
+<div class="chart_chart">
+  <ngx-charts-line-chart
+    [view]="fitContainer2"
+    [scheme]="colorScheme"
+    [timeline]="false"
+    [results]="multi"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    *ngIf="chartType == '5'"
+  >
+  </ngx-charts-line-chart>
+
+  <ngx-charts-pie-chart
+    [view]="fitContainer"
+    [scheme]="colorScheme"
+    [results]="messageData"
+    [gradient]="gradient"
+    [legend]="showLegend"
+    [legendPosition]="legendPosition"
+    *ngIf="chartType == '6'"
+  >
+  </ngx-charts-pie-chart>
+  <ngx-charts-bar-vertical
+    [view]="fitContainer"
+    [scheme]="colorScheme"
+    [results]="surveyData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    *ngIf="chartType == '4'"
+  >
+  </ngx-charts-bar-vertical>
+</div>

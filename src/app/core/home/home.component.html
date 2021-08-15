@@ -1,0 +1,89 @@
+<div class="home_page_content">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Example select</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <section class="dashboard" id="statistics">
+    <h3 class="dashboard_title theme_change">
+      {{ "All Calls Statistics" | translate }}
+    </h3>
+
+    <app-dashboard-card></app-dashboard-card>
+  </section>
+
+  <section class="dashboard" id="statisticsemployees">
+    <h3 class="dashboard_title theme_change">
+      {{ "All Employees Statistics" | translate }}
+    </h3>
+    <app-dashboard-card-employee></app-dashboard-card-employee>
+  </section>
+  <section class="dashboard" id="recievedcall">
+    <div class="row" *ngIf="data.length > 0">
+      <!-- <div class="col-12 col-lg-6" *ngFor="let item of data">
+        <h3 *ngIf="lang == 'en-US'" class="dashboard_title theme_change">
+          {{ item?.descriptionEn }}
+        </h3>
+        <h3 *ngIf="lang == 'ar-SA'" class="dashboard_title theme_change">
+          {{ item?.descriptionAr }}
+        </h3>
+        <div class="chart_card" #containerRef>
+          <div class="mt-3 mb-0 chart_graph side_chart position-relative">
+            <p class="side_chart_title">{{ item?.value }}</p>
+            <round-progress
+              [current]="item?.value"
+              [max]="max"
+              [color]="'#AB54DB'"
+              [background]="'#CDE0E7'"
+              [radius]="70"
+              [stroke]="20"
+              [semicircle]="false"
+              [rounded]="true"
+              [clockwise]="true"
+              [responsive]="false"
+              [duration]="800"
+              [animation]="'easeInOutQuart'"
+              [animationDelay]="0"
+            ></round-progress>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-12 col-lg-6" *ngFor="let item of chartData">
+        <h3 *ngIf="lang == 'en-US'" class="dashboard_title theme_change">
+          {{ item?.name }}
+        </h3>
+        <h3 *ngIf="lang == 'ar-SA'" class="dashboard_title theme_change">
+          {{ item?.name }}
+        </h3>
+        <div class="dashboard_card bg-white chart_card" #containerRef>
+          <div class="">
+            <div
+              class="
+                card_sm_desc card_subtitle_progress_chart
+                theme_change
+                text-truncate text-muted
+              "
+            ></div>
+            <div class="side_chart position-relative">
+              <div class="m-auto">
+                <app-charts
+                  [chartType]="item?.kpiTypeId"
+                  [containerRef]="containerRef"
+                ></app-charts>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

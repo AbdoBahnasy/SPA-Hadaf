@@ -1,0 +1,69 @@
+<div class="row no-gutters">
+  <div class="col-12 col-lg-5 col-sm-6">
+    <div class="background_login">
+      <div class="login_wrapper position-relative">
+        <div class="background_text">
+          <p class="text_desc">
+            Develop the transport system to make the Kingdom a logistics center
+            linking the three continents and promote sustainable economic
+            development and competitiveness adequate to the Saudi Vision 2030.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-7 col-sm-6">
+    <div class="login_wrapper">
+      <div class="login_wrapper_form position-relative">
+        <div class="login_logo_wrapper">
+          <img
+            src="../../../../assets/images/logo.svg"
+            alt="logo"
+            class="img-fluid"
+          />
+        </div>
+
+        <app-login-form></app-login-form>
+      </div>
+    </div>
+    <div class="az-header-right">
+      <ul id="menu" class="list-inline">
+        <li><a href="">FAQ</a></li>
+        <li>July 10, 2021</li>
+        <li><a href=""> Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="language_wrapper">
+      <p>Select your language</p>
+      <button
+        *ngIf="currentLang === 'en-US'"
+        (click)="changeLangage('ar-SA')"
+        type="button"
+        class="btn btn-primary btn--lg btn_mot_icon"
+      >
+        <img
+          src="../../../../../assets/images/btnlang.png"
+          alt="nightmode"
+          class="img-fluid"
+        />
+      </button>
+      <button
+        type="button"
+        *ngIf="currentLang === 'ar-SA'"
+        (click)="changeLangage('en-US')"
+        class="btn btn-primary btn--lg btn_mot_icon w-auto btn_mot_icon_en"
+      >
+        <img
+          src="../../../../../assets/images/Group 207.svg"
+          alt="nightmode"
+          class="img-fluid"
+        />
+        English
+      </button>
+    </div>
+
+    <p class="text-center text-primary">
+      All Copyright Reserved © 2021 to Ministry of transport
+    </p>
+  </div>
+</div>

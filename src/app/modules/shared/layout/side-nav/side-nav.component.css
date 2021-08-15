@@ -1,0 +1,16 @@
+.mode_list_content {
+  list-style: none;
+  padding: 20px;
+  text-align: center;
+}
+.mode_list_content > li:nth-child(1) {
+  margin-top: 30px;
+}
+.left_side_logo {
+  padding: 10px 20px 10px;
+  display: block;
+}
+.side_logo {
+  width: 80px;
+  height: 70px;
+}

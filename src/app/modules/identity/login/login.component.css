@@ -1,0 +1,111 @@
+.background_login {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url("../../../../assets/images/background.png");
+}
+.login_wrapper {
+  margin: 0 55px 0 55px;
+  z-index: 1;
+  height: -webkit-fill-available;
+}
+.background_text {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.text_desc {
+  font-size: var(--font-medium);
+  color: var(--white-color);
+  z-index: 2;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.login_wrapper_form {
+  border: 1px solid var(--main-color);
+  padding: 10px;
+  border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -ms-border-radius: var(--border-radius);
+  -o-border-radius: var(--border-radius);
+  min-height: 580px;
+  margin-top: 140px;
+}
+.login_logo_wrapper {
+  max-width: 180px;
+  background-color: var(--white-color);
+  border: 1px solid var(--main-color);
+  height: 190px;
+  border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -ms-border-radius: var(--border-radius);
+  -o-border-radius: var(--border-radius);
+  overflow: hidden;
+  padding: 20px;
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translate(-50%, -15%);
+  -webkit-transform: translate(-50%, -15%);
+  -moz-transform: translate(-50%, -15%);
+  -ms-transform: translate(-50%, -15%);
+  -o-transform: translate(-50%, -15%);
+}
+.az-header-right {
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+.az-header-right .list-inline {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.az-header-right .list-inline > li,
+.az-header-right .list-inline > li > a,
+.az-header-right .list-inline > li > a:hover {
+  font-size: 14px;
+
+  margin: 0 10px 0 10px;
+  color: var(--main-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+.language_wrapper {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.language_wrapper p {
+  font-size: 14px;
+
+  color: var(--main-color);
+  font-weight: 600;
+}
+.avatar_img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  overflow: hidden;
+}
+.avatar_weight {
+  font-weight: 500;
+}
+.btn_mot_icon_en {
+  color: #000;
+  font-weight: bolder !important;
+  border: 1px solid #4bbbbe !important;
+  padding: 2px 9px 2px 5px !important;
+  border-radius: 20px;
+  font-size: 13px;
+}

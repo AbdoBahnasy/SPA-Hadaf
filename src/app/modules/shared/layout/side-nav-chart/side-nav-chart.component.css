@@ -1,0 +1,71 @@
+.mode_list {
+  height: 180vh;
+}
+.mode_list_content .title {
+  color: #2095ac;
+  font-size: var(--font-small);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.card_title_progress_chart {
+  font-size: var(--font-xsmall);
+  color: var(--text-lighttheme-color);
+}
+.card_subtitle_progress_chart {
+  font-size: var(--font-vsmall);
+}
+.side_chart {
+  min-height: 140px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.side_chart_title {
+  font-size: var(--font-xmedium);
+  font-weight: 600;
+  color: #ab54db;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+.side_chart_title_side {
+  font-size: var(--font-xlarge);
+  font-weight: 600;
+  color: var(--main-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+.side_chart_subtitle {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--main-color);
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+.side_chart_font {
+  font-size: 10px;
+  display: block;
+}
+.text_absolute {
+  position: absolute;
+}
+[role="progressbar"] {
+  margin: auto;
+}

@@ -1,0 +1,118 @@
+.navbar_wrapper {
+  width: 100%;
+  max-height: 100px;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: 0;
+  border-bottom: 1px solid var(--main-color);
+  padding: 30px;
+  background-color: var(--white-color);
+}
+
+.navbar_header .app_title {
+  font-size: var(--font-medium);
+  font-weight: 600;
+}
+.az-header-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0 !important;
+  max-width: 500px;
+  margin-left: auto;
+}
+.az-header-right > li {
+  font-size: 16px;
+  font-weight: 500;
+}
+.avatar_img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  overflow: hidden;
+}
+.avatar_weight {
+  font-weight: 500;
+}
+
+#navigation ul {
+  margin: 0;
+  padding: 0;
+}
+
+#navigation ul li {
+  list-style-type: none;
+  display: inline;
+  font-size: var(--font-xsmall);
+  font-weight: 600;
+  display: inline-block;
+}
+
+#navigation li:not(:first-child):before {
+  content: " | ";
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.avatar_img {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 100%;
+}
+.avatar_name {
+  vertical-align: middle;
+  display: inline;
+  cursor: pointer;
+}
+
+.drawer_side_top {
+  padding: 20px;
+}
+.drawer_side_top_wrapper {
+  min-height: 200px;
+  background-color: var(--main-color);
+}
+.avatar_lg_wrapper {
+  width: 190px;
+  height: 190px;
+  overflow: hidden;
+  border: 10px solid #fff;
+  border-radius: 100%;
+  position: absolute;
+  top: 140%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  -webkit-transform: translate(-50%, 0%);
+  -moz-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  -o-transform: translate(-50%, 0%);
+}
+.profile_info_wrapper {
+  margin-top: 30%;
+  text-align: center;
+}
+.profile_name {
+  font-size: var(--font-small);
+  font-weight: 500;
+}
+.btn_edit {
+  max-width: 100px;
+}
+.btn_mot_icon_en {
+  color: #000;
+  font-weight: bolder !important;
+  border: 1px solid #4bbbbe !important;
+  padding: 2px 9px 2px 5px !important;
+  border-radius: 20px;
+  font-size: 13px;
+}
+/* mat-drawer-container {
+  direction: ltr !important;
+} */

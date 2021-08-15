@@ -1,0 +1,128 @@
+@font-face {
+  font-family: "Neo";
+
+  src: url("./assets/Fonts/neo/New-folder/NeoSansArabicMedium.ttf");
+
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Neo";
+  src: url("./assets/Fonts/neo/New-folder/NeoSansArabicBold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Neo";
+  src: url("./assets/Fonts/neo/New-folder/NeoSansArabic.ttf");
+}
+body,
+.mat-drawer-container {
+  direction: rtl;
+  text-align: right;
+  font-family: "Neo" !important;
+}
+.mat-h3,
+.mat-subheading-2,
+.mat-typography h3,
+.mat-h4,
+.mat-subheading-1,
+.mat-typography h4 {
+  font: 400 16px/28px "Neo", sans-serif;
+}
+.mat-form-field {
+  direction: rtl !important;
+  text-align: right !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 0 5px 5px 0 !important;
+  border-left-style: none !important;
+  border-right-style: solid !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 5px 0 0 5px !important;
+  border-right-style: none !important;
+  border-left-style: solid !important;
+  flex-grow: 1;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-can-float
+  .mat-form-field-outline-gap {
+  border-top-color: var(--main-color) !important;
+}
+.mat-form-field-appearance-outline
+  .mat-form-field-outlin:hover
+  .mat-form-field-outline-gap,
+.mat-form-field-appearance-outline.mat-form-field-type-mat-select:hover
+  .mat-form-field-outline-gap {
+  border-top-color: var(--main-color) !important;
+}
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-gap,
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-gap {
+  border-top-color: var(--main-color) !important;
+}
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+  .mat-form-field-outline-gap {
+  border-top-color: #f44336 !important;
+}
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+  .mat-form-field-outline-gap {
+  border-top-color: #f44336 !important;
+}
+.mat-form-field-appearance-outline.mat-form-field-can-float:hover
+  .mat-form-field-label
+  mat-label,
+.mat-form-field-appearance-outline.mat-form-field-can-float
+  .mat-form-field-label
+  mat-label,
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label mat-label {
+  background-color: #fff !important;
+  opacity: 1 !important;
+}
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label mat-label {
+  background-color: #fff !important;
+  opacity: 1 !important;
+}
+.mat-form-field-label,
+.mat-form-field-label-wrapper {
+  opacity: 1 !important;
+}
+
+.chart_graph {
+  direction: ltr;
+}
+/* .mat-drawer {
+  transform: translate3d(100%, 0, 0) !important;
+} */
+.left_side_nav {
+  width: 120px;
+  min-height: 100vh;
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  border-left: 1px solid var(--main-color);
+}
+.right_side_nav {
+  width: 370px;
+  height: 100%;
+  overflow-y: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  background: #cdebeb url("./assets/images/shape.png") repeat-y 50% 0;
+  padding: 20px;
+}
+.home_page_content {
+  margin-top: 97px;
+  margin-left: 370px;
+  margin-right: 120px;
+  padding: 30px;
+}
+.navbar_header {
+  margin-right: 120px;
+}
+.navbar_wrapper {
+  padding-left: 30px !important;
+}

@@ -1,0 +1,92 @@
+<div class="right_side_nav">
+  <div class="mode_list">
+    <div class="mode_list_content">
+      <p class="title">
+        {{ "Calls duration Statistics" | translate }}
+      </p>
+      <p *ngIf="chartData.length == 0">{{ "NO Data" | translate }}</p>
+      <div *ngIf="chartData.length > 0">
+        <div
+          class="dashboard_card bg-white chart_card"
+          *ngFor="let item of chartData"
+        >
+          <div class="p-3">
+            <div
+              *ngIf="lang == 'en-US'"
+              class="
+                card_title card_title_progress_chart
+                theme_change
+                text-truncate
+              "
+            >
+              {{ item?.name }}
+            </div>
+            <div
+              *ngIf="lang == 'ar-SA'"
+              class="
+                card_title card_title_progress_chart
+                theme_change
+                text-truncate
+              "
+            >
+              {{ item?.name }}
+            </div>
+            <div
+              class="
+                card_sm_desc card_subtitle_progress_chart
+                theme_change
+                text-truncate text-muted
+              "
+            ></div>
+            <div class="side_chart position-relative">
+              <p class="side_chart_title">{{ item?.readValue }}</p>
+              <div class="m-auto">
+                <round-progress
+                  [current]="item?.readValue"
+                  [max]="max"
+                  [color]="'#AB54DB'"
+                  [background]="'#CDE0E7'"
+                  [radius]="70"
+                  [stroke]="20"
+                  [semicircle]="false"
+                  [rounded]="true"
+                  [clockwise]="true"
+                  [responsive]="false"
+                  [duration]="800"
+                  [animation]="'easeInOutQuart'"
+                  [animationDelay]="0"
+                ></round-progress>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <p class="title">{{ "Average Calls" | translate }}</p>
+
+      <div class="dashboard_card bg-white chart_card">
+        <div class="p-3">
+          <div class="side_chart position-relative">
+            <p class="side_chart_title">{{ averageCall?.value }}</p>
+            <div class="m-auto">
+              <round-progress
+                [current]="averageCall?.value"
+                [max]="max"
+                [color]="'#CDE0E7'"
+                [background]="'#CDE0E7'"
+                [radius]="70"
+                [stroke]="20"
+                [semicircle]="false"
+                [rounded]="true"
+                [clockwise]="true"
+                [responsive]="false"
+                [duration]="800"
+                [animation]="'easeInOutQuart'"
+                [animationDelay]="0"
+              ></round-progress>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

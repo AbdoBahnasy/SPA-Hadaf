@@ -1,0 +1,14 @@
+0000000000000000000000000000000000000000 fd864ad54e20d695cd98c53e4308bd96ffbb0c59 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1627220635 +0200	clone: from https://bitbucket.org/Hazem_Hisham/motproject.git
+fd864ad54e20d695cd98c53e4308bd96ffbb0c59 462fd0f7aeaa7b61d1a81a79387b23e5a51aa455 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1627238846 +0200	commit: adding side nav and enhancing structure
+462fd0f7aeaa7b61d1a81a79387b23e5a51aa455 a0e46b6cdca4d2bc44e1050f9fef18b8d64bee69 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1627313724 +0200	pull --tags origin master: Fast-forward
+a0e46b6cdca4d2bc44e1050f9fef18b8d64bee69 06266bbd7e69f0c35a22a51952b5a428f7f5d236 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1627331788 +0200	commit: restructure app to be mor edynamic with charts
+06266bbd7e69f0c35a22a51952b5a428f7f5d236 3950b9153ac561dfb1cf865cc4f00eb2b87d3a75 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1628803456 +0200	commit: apllying features
+3950b9153ac561dfb1cf865cc4f00eb2b87d3a75 3454ca035ca6d35c65e9c3a30c7af19a674442e0 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1628811017 +0200	commit: applying more features
+3454ca035ca6d35c65e9c3a30c7af19a674442e0 c013ff94ff3439efde1a9968463f35c0f7810096 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1628812131 +0200	commit: more
+c013ff94ff3439efde1a9968463f35c0f7810096 9307b1457635a5d2f7b84ce1a7649f010df44e3b aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1628829769 +0200	commit: preparing to recieve api
+9307b1457635a5d2f7b84ce1a7649f010df44e3b 3b59f727c4a65dfd061c99b69599b5a50aea1fc8 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1628834423 +0200	pull --tags origin master: Fast-forward
+3b59f727c4a65dfd061c99b69599b5a50aea1fc8 00f8ee3d45d1c5dbbb62876e5accc8bbe52ef04e aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1628836778 +0200	commit: applying loader
+00f8ee3d45d1c5dbbb62876e5accc8bbe52ef04e dac91c1242d9aa56131587eec06fb5857d75f44b aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1628971699 +0200	pull --tags origin master: Fast-forward
+dac91c1242d9aa56131587eec06fb5857d75f44b b08f954d7ee4e175728afc8ef51d5c1bf66e4fe0 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1629021274 +0200	commit: test
+b08f954d7ee4e175728afc8ef51d5c1bf66e4fe0 9ec61252613c8533ef67ecaf6bbaca593802269a aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1629061683 +0200	commit: applying identity server login
+9ec61252613c8533ef67ecaf6bbaca593802269a b1b0d400e91201595f7a8e09994b66748474f3c7 aabouelkhyer@2p.com.sa <dev.ahmed.abulkheir@gmail.com> 1629064214 +0200	commit: applying oidc service
