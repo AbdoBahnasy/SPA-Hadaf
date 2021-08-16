@@ -45,12 +45,12 @@ import { LocalizedDateNumbersPipe } from './modules/shared/custom-pips/localized
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
     oidcConfigService.withConfig({
-      stsServer: 'http://localhost:5105/Account/Login',
-      responseType: 'code',
-      redirectUrl: window.location.origin,
-      postLogoutRedirectUri: window.location.origin,
-      clientId: 'angular_client',
-      scope: 'openid dashboards',
+      stsServer: 'http://localhost:5105' + '/connect/authorize',
+      responseType: 'id_token token',
+      redirectUrl: window.location.origin + '/',
+      postLogoutRedirectUri: window.location.origin + '/',
+      clientId: 'js',
+      scope: 'openid profile dashboards dashboards.signalrhub',
 
       silentRenew: true,
       silentRenewUrl: `${window.location.origin}/silent-renew.html`,
@@ -128,4 +128,4 @@ registerLocaleData(localeAr);
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
