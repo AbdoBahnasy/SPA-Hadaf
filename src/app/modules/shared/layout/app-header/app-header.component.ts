@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AppHeaderComponent implements OnInit {
   currentLang: string;
+  authenticated: boolean = false;
   currentDate = new Date();
   showLoader: boolean = false;
   position: string = null;
@@ -97,6 +98,7 @@ export class AppHeaderComponent implements OnInit {
       },
     ],
   };
+
   constructor(
     private signalR: SignalRService,
     private kpiService: KpiService,
@@ -111,27 +113,160 @@ export class AppHeaderComponent implements OnInit {
   themeIdentity: string = 'light';
 
   ngOnInit(): void {
+
     this.sharedService.themeIdentity.subscribe((result) => {
       this.themeIdentity = result;
     });
-    // this.oidcSecurityService.
-    this.oidcSecurityService.checkAuth().subscribe(
-      (auth) => {
-        if (auth == true) {
-          this.sharedService.userValue = auth;
-          console.log('is authenticated', auth);
-          localStorage.setItem('authenticated', auth + '');
-          this.getMainData();
-          this.getWoekGroups();
-        } else {
-          this.sharedService.userValue = auth;
-          this.getMainData();
-          window.location.href = `${environment.mainURL}/Account/Login`;
-        }
-      },
-      (error) => {}
-    );
+
+    console.log('identity component, checking authorized' + this.sharedService.userValue);
+    this.authenticated = this.sharedService.userValue;
+
+    if (this.authenticated) {
+      console.log('is already authenticated', this.authenticated);
+      this.oidcSecurityService.checkAuth().subscribe(
+        (auth) => {
+          if (auth == true) {
+            this.sharedService.userValue = auth;
+            console.log('is authenticated', auth);
+            localStorage.setItem('authenticated', auth + '');
+            this.getMainData();
+            this.getWoekGroups();
+          }
+        },
+        (error) => { }
+      );
+    }
+    else {
+      this.authorize();
+    }
   }
+
+  authorize() {
+
+    let authorizationUrl = environment.mainURL + '/connect/authorize';
+    let client_id = 'js';
+    let redirect_uri = location.origin;
+    let response_type = 'id_token token';
+    let scope = 'openid profile dashboards dashboards.signalrhub';
+    let nonce = 'N' + Math.random() + '' + Date.now();
+    let state = Date.now() + '' + Math.random();
+
+    localStorage.setItem('authStateControl', state);
+    localStorage.setItem('authNonce', nonce);
+
+    let url =
+      authorizationUrl + '?' +
+      'response_type=' + encodeURI(response_type) + '&' +
+      'client_id=' + encodeURI(client_id) + '&' +
+      'redirect_uri=' + encodeURI(redirect_uri) + '&' +
+      'scope=' + encodeURI(scope) + '&' +
+      'nonce=' + encodeURI(nonce) + '&' +
+      'state=' + encodeURI(state);
+
+    window.location.href = url;
+  }
+
+  public AuthorizedCallback() {
+    debugger;
+    this.ResetAuthorizationData();
+
+    let hash = window.location.hash.substr(1);
+
+    let result: any = hash.split('&').reduce(function (result: any, item: string) {
+      let parts = item.split('=');
+      result[parts[0]] = parts[1];
+      return result;
+    }, {});
+
+    console.log(result);
+
+    let token = '';
+    let id_token = '';
+    let authResponseIsValid = false;
+
+    if (!result.error) {
+
+      if (result.state !== localStorage.getItem('authStateControl')) {
+        console.log('AuthorizedCallback incorrect state');
+      } else {
+
+        token = result.access_token;
+        id_token = result.id_token;
+
+        let dataIdToken: any = this.getDataFromToken(id_token);
+
+        // validate nonce
+        if (dataIdToken.nonce !== localStorage.getItem('authNonce')) {
+          console.log('AuthorizedCallback incorrect nonce');
+        } else {
+          localStorage.setItem('authNonce', '');
+          localStorage.setItem('authStateControl', '');
+
+          authResponseIsValid = true;
+          console.log('AuthorizedCallback state and nonce validated, returning access token');
+       
+          this.oidcSecurityService.authorize();
+        }
+      }
+    }
+
+    if (authResponseIsValid) {
+      this.SetAuthorizationData(token, id_token);
+    }
+  }
+
+  public ResetAuthorizationData() {
+    localStorage.setItem('authorizationData', '');
+    localStorage.setItem('authorizationDataIdToken', '');
+
+    this.authenticated = false;
+    localStorage.setItem('IsAuthorized', "false");
+    this.sharedService.userValue = false;
+  }
+
+  private urlBase64Decode(str: string) {
+    let output = str.replace('-', '+').replace('_', '/');
+    switch (output.length % 4) {
+      case 0:
+        break;
+      case 2:
+        output += '==';
+        break;
+      case 3:
+        output += '=';
+        break;
+      default:
+        throw 'Illegal base64url string!';
+    }
+
+    return window.atob(output);
+  }
+
+  private getDataFromToken(token: any) {
+    let data = {};
+
+    if (typeof token !== 'undefined') {
+      let encoded = token.split('.')[1];
+
+      data = JSON.parse(this.urlBase64Decode(encoded));
+    }
+
+    return data;
+  }
+
+  public SetAuthorizationData(token: any, id_token: any) {
+    if (localStorage.getItem('authorizationData') !== '') {
+      localStorage.setItem('authorizationData', '');
+    }
+
+    localStorage.setItem('authorizationData', token);
+    localStorage.setItem('authorizationDataIdToken', id_token);
+    this.authenticated = true;
+    this.sharedService.userValue = true;
+    
+    localStorage.setItem('IsAuthorized', 'true');
+  }
+
   startSyncingData() {
     this.signalR.startConnection();
     this.signalR.notificationEvents.subscribe((data) => {

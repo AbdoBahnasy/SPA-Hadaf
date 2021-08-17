@@ -46,18 +46,28 @@ import { SpinnersAngularModule } from 'spinners-angular';
 import localeAr from '@angular/common/locales/ar-SA';
 import { LocalizedDateNumbersPipe } from './modules/shared/custom-pips/localized-date-numbers.pipe';
 
-export function configureAuth(oidcConfigService: OidcConfigService) {
+export function configureAuth(oidcConfigService: OidcConfigService, service: AppHeaderComponent) {
+ 
+  if (localStorage.getItem('IsAuthorized') == 'true') {
+    window.location.href = window.location.origin + '/home';
+    return;
+  }
+
+  if (window.location.hash) {
+    service.AuthorizedCallback();
+  }
+
   return () =>
     oidcConfigService.withConfig({
-      stsServer: 'http://localhost:5105',
-      responseType: 'Implicit',
+      stsServer: 'http://localhost:5105',//+ '/connect/authorize',
+      responseType: 'implicit',
       redirectUrl: window.location.origin + '/',
       postLogoutRedirectUri: window.location.origin + '/',
       clientId: 'js',
       scope: 'openid profile dashboards dashboards.signalrhub',
 
-      silentRenew: true,
-      silentRenewUrl: `${window.location.origin}/silent-renew.html`,
+      // silentRenew: true,
+      // silentRenewUrl: `${window.location.origin}/silent-renew.html`,
       logLevel: LogLevel.Debug,
     });
 }
@@ -123,6 +133,7 @@ registerLocaleData(localeAr);
     DatePipe,
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     OidcConfigService,
+    AppHeaderComponent,
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: HeaderInterceptor,
@@ -131,10 +142,10 @@ registerLocaleData(localeAr);
     {
       provide: APP_INITIALIZER,
       useFactory: configureAuth,
-      deps: [OidcConfigService],
+      deps: [OidcConfigService, AppHeaderComponent],
       multi: true,
     },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
