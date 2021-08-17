@@ -143,6 +143,7 @@ export class AppHeaderComponent implements OnInit {
 
   public Authorize() {
     debugger;
+    localStorage.removeItem('authorizationData');
     let authorizationUrl = environment.mainURL + '/connect/authorize';
     let client_id = 'js';
     let redirect_uri = location.origin;
@@ -230,7 +231,7 @@ export class AppHeaderComponent implements OnInit {
     this.SetAuthorizationData(token, id_token);
 
     this.getMainData(token);
-    this.getWoekGroups(token);
+    // this.getWoekGroups(token);
   }
   private urlBase64Decode(str: string) {
     let output = str.replace('-', '+').replace('_', '/');
@@ -326,6 +327,7 @@ export class AppHeaderComponent implements OnInit {
       console.log('data', val);
       this.sharedService.allData.emit(val.statistics);
       this.showLoader = false;
+      this.getWoekGroups(token);
     });
 
     // setTimeout(() => {
@@ -341,6 +343,7 @@ export class AppHeaderComponent implements OnInit {
       this.woekGroups = val;
       this.sharedService.workGroupData.emit(this.woekGroups);
       this.showLoader = false;
+      window.location.href = window.location.origin + '/home';
     });
   }
 }

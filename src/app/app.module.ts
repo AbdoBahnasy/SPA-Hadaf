@@ -56,12 +56,15 @@ export function configureAuth(
   //   return;
   // }
 
-  if (window.location.hash) {
+  if (window.location.hash && !localStorage.getItem('authorizationData')) {
     service.AuthorizedCallback();
     return;
   }
 
-  if (!localStorage.getItem('authorizationData')) {
+  if (
+    location.href.indexOf('#') != -1 &&
+    !localStorage.getItem('authorizationData')
+  ) {
     service.Authorize();
     return;
   }
