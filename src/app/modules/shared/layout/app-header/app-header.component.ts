@@ -117,31 +117,32 @@ export class AppHeaderComponent implements OnInit {
     this.sharedService.themeIdentity.subscribe((result) => {
       this.themeIdentity = result;
     });
+    debugger;
 
-    console.log('identity component, checking authorized' + this.sharedService.userValue);
-    this.authenticated = this.sharedService.userValue;
+    // console.log('identity component, checking authorized' + this.sharedService.userValue);
+    // this.authenticated = this.sharedService.userValue;
 
-    if (this.authenticated) {
-      console.log('is already authenticated', this.authenticated);
-      this.oidcSecurityService.checkAuth().subscribe(
-        (auth) => {
-          if (auth == true) {
-            this.sharedService.userValue = auth;
-            console.log('is authenticated', auth);
-            localStorage.setItem('authenticated', auth + '');
-            this.getMainData();
-            this.getWoekGroups();
-          }
-        },
-        (error) => { }
-      );
-    }
-    else {
-      this.authorize();
-    }
+    // if (this.authenticated) {
+    //   console.log('is already authenticated', this.authenticated);
+    //   this.oidcSecurityService.checkAuth().subscribe(
+    //     (auth) => {
+    //       if (auth == true) {
+    //         this.sharedService.userValue = auth;
+    //         console.log('is authenticated', auth);
+    //         localStorage.setItem('authenticated', auth + '');
+    //         this.getMainData();
+    //         this.getWoekGroups();
+    //       }
+    //     },
+    //     (error) => { }
+    //   );
+    // }
+    // else {
+    //   this.authorize();
+    // }
   }
 
-  authorize() {
+  public Authorize() {
 
     let authorizationUrl = environment.mainURL + '/connect/authorize';
     let client_id = 'js';
@@ -205,13 +206,17 @@ export class AppHeaderComponent implements OnInit {
           authResponseIsValid = true;
           console.log('AuthorizedCallback state and nonce validated, returning access token');
        
-          this.oidcSecurityService.authorize();
+         // this.oidcSecurityService.authorize();
+         this.getMainData();
+         this.getWoekGroups()
         }
       }
     }
-
+debugger;
     if (authResponseIsValid) {
       this.SetAuthorizationData(token, id_token);
+      
+    window.location.href = window.location.origin + '/home';
     }
   }
 

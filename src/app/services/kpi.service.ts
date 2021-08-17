@@ -12,7 +12,7 @@ export class KpiService {
     private http: HttpClient,
     private oidcSecurityService: OidcSecurityService
   ) {}
-  token = this.oidcSecurityService.getToken();
+  token = localStorage.getItem('authorizationData');
   lang = localStorage.getItem('lang') || AppSettings.defaultLang;
   httpOptions = {
     headers: new HttpHeaders({

@@ -47,29 +47,33 @@ import localeAr from '@angular/common/locales/ar-SA';
 import { LocalizedDateNumbersPipe } from './modules/shared/custom-pips/localized-date-numbers.pipe';
 
 export function configureAuth(oidcConfigService: OidcConfigService, service: AppHeaderComponent) {
- 
-  if (localStorage.getItem('IsAuthorized') == 'true') {
-    window.location.href = window.location.origin + '/home';
-    return;
-  }
+ debugger;
+  // if (localStorage.getItem('IsAuthorized') == 'true') {
+  //   window.location.href = window.location.origin + '/home';
+  //   return;
+  // }
 
   if (window.location.hash) {
-    service.AuthorizedCallback();
+   return service.AuthorizedCallback();
   }
+ 
+   if (!localStorage.getItem('authorizationData')) {
+       service.Authorize();
+   }
+  service.Authorize();
+  // return () =>
+  //   oidcConfigService.withConfig({
+  //     stsServer: 'http://localhost:5105',//+ '/connect/authorize',
+  //     responseType: 'implicit',
+  //     redirectUrl: window.location.origin + '/',
+  //     postLogoutRedirectUri: window.location.origin + '/',
+  //     clientId: 'js',
+  //     scope: 'openid profile dashboards dashboards.signalrhub',
 
-  return () =>
-    oidcConfigService.withConfig({
-      stsServer: 'http://localhost:5105',//+ '/connect/authorize',
-      responseType: 'implicit',
-      redirectUrl: window.location.origin + '/',
-      postLogoutRedirectUri: window.location.origin + '/',
-      clientId: 'js',
-      scope: 'openid profile dashboards dashboards.signalrhub',
-
-      // silentRenew: true,
-      // silentRenewUrl: `${window.location.origin}/silent-renew.html`,
-      logLevel: LogLevel.Debug,
-    });
+  //     // silentRenew: true,
+  //     // silentRenewUrl: `${window.location.origin}/silent-renew.html`,
+  //     logLevel: LogLevel.Debug,
+  //   });
 }
 const routes: Routes = [
   // {
@@ -143,7 +147,7 @@ registerLocaleData(localeAr);
       provide: APP_INITIALIZER,
       useFactory: configureAuth,
       deps: [OidcConfigService, AppHeaderComponent],
-      multi: true,
+      multi: false,
     },
   ],
   bootstrap: [AppComponent],
