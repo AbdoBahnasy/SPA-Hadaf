@@ -200,7 +200,6 @@ export class AppHeaderComponent implements OnInit {
         if (dataIdToken.nonce !== localStorage.getItem('authNonce')) {
           console.log('AuthorizedCallback incorrect nonce');
         } else {
-<<<<<<< HEAD
           localStorage.setItem('authNonce', '');
           localStorage.setItem('authStateControl', '');
 
@@ -210,11 +209,6 @@ export class AppHeaderComponent implements OnInit {
          // this.oidcSecurityService.authorize();
          this.getMainData();
          this.getWoekGroups()
-=======
-          this.sharedService.userValue = auth;
-          this.getMainData();
-          window.location.href = `${environment.mainURL}/Account/Login?ReturnUrl=client_id=js`;
->>>>>>> f3573101e0b62fc1865bf20948fde52a8876d704
         }
       }
     }
