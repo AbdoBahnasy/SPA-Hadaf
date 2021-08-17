@@ -49,7 +49,7 @@ import { LocalizedDateNumbersPipe } from './modules/shared/custom-pips/localized
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
     oidcConfigService.withConfig({
-      stsServer: 'http://localhost:5105',
+      stsServer: 'http://localhost:5105/connect/authorize',
       responseType: 'Implicit',
       redirectUrl: window.location.origin + '/',
       postLogoutRedirectUri: window.location.origin + '/',

@@ -126,7 +126,7 @@ export class AppHeaderComponent implements OnInit {
         } else {
           this.sharedService.userValue = auth;
           this.getMainData();
-          window.location.href = `${environment.mainURL}/Account/Login`;
+          window.location.href = `${environment.mainURL}/Account/Login?ReturnUrl=client_id=js`;
         }
       },
       (error) => {}
