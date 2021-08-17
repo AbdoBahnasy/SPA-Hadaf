@@ -1,13 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 import { KpiService } from 'src/app/services/kpi.service';
-
+import { SignalRService } from 'src/app/services/signal-r.service';
 import { AppSettings } from '../../../../../app/core/settings/app-settings';
 import { TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { error } from '@angular/compiler/src/util';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-header',
   templateUrl: './app-header.component.html',
@@ -99,9 +98,9 @@ export class AppHeaderComponent implements OnInit {
     ],
   };
   constructor(
+    private signalR: SignalRService,
     private kpiService: KpiService,
     private oidcSecurityService: OidcSecurityService,
-    private http: HttpClient,
     private translate: TranslateService,
     private sharedService: SharedServiceService,
     @Inject(DOCUMENT) private document: Document
@@ -115,15 +114,29 @@ export class AppHeaderComponent implements OnInit {
     this.sharedService.themeIdentity.subscribe((result) => {
       this.themeIdentity = result;
     });
+    // this.oidcSecurityService.
     this.oidcSecurityService.checkAuth().subscribe(
       (auth) => {
-        console.log('is authenticated', auth);
-        this.getMainData();
+        if (auth == true) {
+          this.sharedService.userValue = auth;
+          console.log('is authenticated', auth);
+          localStorage.setItem('authenticated', auth + '');
+          this.getMainData();
+          this.getWoekGroups();
+        } else {
+          this.sharedService.userValue = auth;
+          this.getMainData();
+          window.location.href = `${environment.mainURL}/Account/Login`;
+        }
       },
-      (error) => {
-        this.login();
-      }
+      (error) => {}
     );
+  }
+  startSyncingData() {
+    this.signalR.startConnection();
+    this.signalR.notificationEvents.subscribe((data) => {
+      this.getMainData();
+    });
   }
   login() {
     this.oidcSecurityService.authorize();
@@ -166,9 +179,9 @@ export class AppHeaderComponent implements OnInit {
   }
   getMainData() {
     this.showLoader = true;
-    this.kpiService.getKpiData().subscribe((val) => {
+    this.kpiService.getKpiData().subscribe((val: any) => {
       console.log('data', val);
-
+      this.sharedService.allData.emit(val.statistics);
       this.showLoader = false;
     });
 
@@ -176,5 +189,15 @@ export class AppHeaderComponent implements OnInit {
     //   this.sharedService.allData.emit(this.data.statistics);
     //   console.log('this.test', this.data.statistics);
     // }, 2000);
+  }
+  woekGroups;
+  getWoekGroups() {
+    this.showLoader = true;
+    this.kpiService.getWorkGroups().subscribe((val) => {
+      console.log('data', val);
+      this.woekGroups = val;
+      this.sharedService.workGroupData.emit(this.woekGroups);
+      this.showLoader = false;
+    });
   }
 }

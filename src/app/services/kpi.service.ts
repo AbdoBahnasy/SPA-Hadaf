@@ -12,18 +12,24 @@ export class KpiService {
     private http: HttpClient,
     private oidcSecurityService: OidcSecurityService
   ) {}
+  token = this.oidcSecurityService.getToken();
+  lang = localStorage.getItem('lang') || AppSettings.defaultLang;
+  httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + this.token,
+      lang: this.lang,
+    }),
+  };
   getKpiData() {
-    const token = this.oidcSecurityService.getToken();
-    const lang = localStorage.getItem('lang') || AppSettings.defaultLang;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-        lang: lang,
-      }),
-    };
     return this.http.get(
-      `${environment.apiUrl}/Dashboards/GetDashboardKPI`,
-      httpOptions
+      `${environment.apiUrl}/Dashboards/statistics`,
+      this.httpOptions
+    );
+  }
+  getWorkGroups() {
+    return this.http.get(
+      `${environment.apiUrl}/Statistics/getWorkgroups`,
+      this.httpOptions
     );
   }
 }

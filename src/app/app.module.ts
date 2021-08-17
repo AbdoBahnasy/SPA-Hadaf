@@ -32,7 +32,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ChartsComponent } from './modules/shared/charts/charts.component';
 import { AppSettings } from './core/settings/app-settings';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { createTranslateLoader } from './core/utilities/translate';
 import { ArabicNumbersPipe } from './modules/shared/custom-pips/arabic-numbers.pipe';
 import { LocalizedDatePipe } from './modules/shared/custom-pips/localized-date.pipe';
@@ -45,8 +49,8 @@ import { LocalizedDateNumbersPipe } from './modules/shared/custom-pips/localized
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
     oidcConfigService.withConfig({
-      stsServer: 'http://localhost:5105' + '/connect/authorize',
-      responseType: 'id_token token',
+      stsServer: 'http://localhost:5105',
+      responseType: 'Implicit',
       redirectUrl: window.location.origin + '/',
       postLogoutRedirectUri: window.location.origin + '/',
       clientId: 'js',
@@ -119,6 +123,11 @@ registerLocaleData(localeAr);
     DatePipe,
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     OidcConfigService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HeaderInterceptor,
+    //   multi: true,
+    // },
     {
       provide: APP_INITIALIZER,
       useFactory: configureAuth,
@@ -128,4 +137,4 @@ registerLocaleData(localeAr);
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

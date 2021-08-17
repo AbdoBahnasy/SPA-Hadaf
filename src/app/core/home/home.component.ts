@@ -204,6 +204,12 @@ export class HomeComponent implements OnInit {
   dataToRender = [];
   chartrDataToRender = [];
   //data
+  WorkGroupList = [];
+  getWorkGroupList() {
+    this.sharedService.workGroupData.subscribe((data) => {
+      this.WorkGroupList = data;
+    });
+  }
   getData() {
     this.sharedService.allData.subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
