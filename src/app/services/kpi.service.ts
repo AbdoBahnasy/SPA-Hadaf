@@ -12,7 +12,7 @@ export class KpiService {
     private http: HttpClient,
     private oidcSecurityService: OidcSecurityService
   ) {}
-  token = localStorage.getItem('authorizationData');
+  token = null;
   lang = localStorage.getItem('lang') || AppSettings.defaultLang;
   httpOptions = {
     headers: new HttpHeaders({
@@ -20,13 +20,15 @@ export class KpiService {
       lang: this.lang,
     }),
   };
-  getKpiData() {
+  getKpiData(token) {
+    this.token = token;
     return this.http.get(
       `${environment.apiUrl}/Dashboards/statistics`,
       this.httpOptions
     );
   }
-  getWorkGroups() {
+  getWorkGroups(token) {
+    this.token = token;
     return this.http.get(
       `${environment.apiUrl}/Statistics/getWorkgroups`,
       this.httpOptions

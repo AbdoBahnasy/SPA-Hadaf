@@ -15,6 +15,11 @@ export class SharedServiceService {
   }
   public set userValue(val) {
     this.userSubject.next(val);
+    if (val == false) {
+      localStorage.setItem('authorizationData', '');
+      localStorage.setItem('authorizationDataIdToken', '');
+      localStorage.setItem('IsAuthorized', 'false');
+    }
   }
   constructor() {}
 }

@@ -46,21 +46,26 @@ import { SpinnersAngularModule } from 'spinners-angular';
 import localeAr from '@angular/common/locales/ar-SA';
 import { LocalizedDateNumbersPipe } from './modules/shared/custom-pips/localized-date-numbers.pipe';
 
-export function configureAuth(oidcConfigService: OidcConfigService, service: AppHeaderComponent) {
- debugger;
+export function configureAuth(
+  oidcConfigService: OidcConfigService,
+  service: AppHeaderComponent
+) {
+  debugger;
   // if (localStorage.getItem('IsAuthorized') == 'true') {
   //   window.location.href = window.location.origin + '/home';
   //   return;
   // }
 
   if (window.location.hash) {
-   return service.AuthorizedCallback();
+    service.AuthorizedCallback();
+    return;
   }
- 
-   if (!localStorage.getItem('authorizationData')) {
-       service.Authorize();
-   }
-  service.Authorize();
+
+  if (!localStorage.getItem('authorizationData')) {
+    service.Authorize();
+    return;
+  }
+
   // return () =>
   //   oidcConfigService.withConfig({
   //     stsServer: 'http://localhost:5105',//+ '/connect/authorize',
@@ -147,9 +152,9 @@ registerLocaleData(localeAr);
       provide: APP_INITIALIZER,
       useFactory: configureAuth,
       deps: [OidcConfigService, AppHeaderComponent],
-      multi: false,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

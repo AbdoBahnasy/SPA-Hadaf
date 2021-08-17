@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AppHeaderComponent implements OnInit {
   currentLang: string;
-  authenticated: boolean = false;
+
   currentDate = new Date();
   showLoader: boolean = false;
   position: string = null;
@@ -113,7 +113,6 @@ export class AppHeaderComponent implements OnInit {
   themeIdentity: string = 'light';
 
   ngOnInit(): void {
-
     this.sharedService.themeIdentity.subscribe((result) => {
       this.themeIdentity = result;
     });
@@ -143,7 +142,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   public Authorize() {
-
+    debugger;
     let authorizationUrl = environment.mainURL + '/connect/authorize';
     let client_id = 'js';
     let redirect_uri = location.origin;
@@ -156,28 +155,42 @@ export class AppHeaderComponent implements OnInit {
     localStorage.setItem('authNonce', nonce);
 
     let url =
-      authorizationUrl + '?' +
-      'response_type=' + encodeURI(response_type) + '&' +
-      'client_id=' + encodeURI(client_id) + '&' +
-      'redirect_uri=' + encodeURI(redirect_uri) + '&' +
-      'scope=' + encodeURI(scope) + '&' +
-      'nonce=' + encodeURI(nonce) + '&' +
-      'state=' + encodeURI(state);
+      authorizationUrl +
+      '?' +
+      'response_type=' +
+      encodeURI(response_type) +
+      '&' +
+      'client_id=' +
+      encodeURI(client_id) +
+      '&' +
+      'redirect_uri=' +
+      encodeURI(redirect_uri) +
+      '&' +
+      'scope=' +
+      encodeURI(scope) +
+      '&' +
+      'nonce=' +
+      encodeURI(nonce) +
+      '&' +
+      'state=' +
+      encodeURI(state);
 
     window.location.href = url;
   }
 
   public AuthorizedCallback() {
     debugger;
-    this.ResetAuthorizationData();
+    this.sharedService.userValue = false;
 
     let hash = window.location.hash.substr(1);
 
-    let result: any = hash.split('&').reduce(function (result: any, item: string) {
-      let parts = item.split('=');
-      result[parts[0]] = parts[1];
-      return result;
-    }, {});
+    let result: any = hash
+      .split('&')
+      .reduce(function (result: any, item: string) {
+        let parts = item.split('=');
+        result[parts[0]] = parts[1];
+        return result;
+      }, {});
 
     console.log(result);
 
@@ -186,11 +199,9 @@ export class AppHeaderComponent implements OnInit {
     let authResponseIsValid = false;
 
     if (!result.error) {
-
       if (result.state !== localStorage.getItem('authStateControl')) {
         console.log('AuthorizedCallback incorrect state');
       } else {
-
         token = result.access_token;
         id_token = result.id_token;
 
@@ -204,31 +215,23 @@ export class AppHeaderComponent implements OnInit {
           localStorage.setItem('authStateControl', '');
 
           authResponseIsValid = true;
-          console.log('AuthorizedCallback state and nonce validated, returning access token');
-       
-         // this.oidcSecurityService.authorize();
-         this.getMainData();
-         this.getWoekGroups()
+          this.proceedToGetData(token, id_token);
+          console.log(
+            'AuthorizedCallback state and nonce validated, returning access token'
+          );
+
+          // this.oidcSecurityService.authorize();
         }
       }
     }
-debugger;
-    if (authResponseIsValid) {
-      this.SetAuthorizationData(token, id_token);
-      
-    window.location.href = window.location.origin + '/home';
-    }
+    debugger;
   }
+  proceedToGetData(token, id_token) {
+    this.SetAuthorizationData(token, id_token);
 
-  public ResetAuthorizationData() {
-    localStorage.setItem('authorizationData', '');
-    localStorage.setItem('authorizationDataIdToken', '');
-
-    this.authenticated = false;
-    localStorage.setItem('IsAuthorized', "false");
-    this.sharedService.userValue = false;
+    this.getMainData(token);
+    this.getWoekGroups(token);
   }
-
   private urlBase64Decode(str: string) {
     let output = str.replace('-', '+').replace('_', '/');
     switch (output.length % 4) {
@@ -266,16 +269,16 @@ debugger;
 
     localStorage.setItem('authorizationData', token);
     localStorage.setItem('authorizationDataIdToken', id_token);
-    this.authenticated = true;
+
     this.sharedService.userValue = true;
-    
+
     localStorage.setItem('IsAuthorized', 'true');
   }
 
   startSyncingData() {
     this.signalR.startConnection();
     this.signalR.notificationEvents.subscribe((data) => {
-      this.getMainData();
+      // this.getMainData();
     });
   }
   login() {
@@ -317,9 +320,9 @@ debugger;
       head.appendChild(link);
     }
   }
-  getMainData() {
+  getMainData(token) {
     this.showLoader = true;
-    this.kpiService.getKpiData().subscribe((val: any) => {
+    this.kpiService.getKpiData(token).subscribe((val: any) => {
       console.log('data', val);
       this.sharedService.allData.emit(val.statistics);
       this.showLoader = false;
@@ -331,9 +334,9 @@ debugger;
     // }, 2000);
   }
   woekGroups;
-  getWoekGroups() {
+  getWoekGroups(token) {
     this.showLoader = true;
-    this.kpiService.getWorkGroups().subscribe((val) => {
+    this.kpiService.getWorkGroups(token).subscribe((val) => {
       console.log('data', val);
       this.woekGroups = val;
       this.sharedService.workGroupData.emit(this.woekGroups);
