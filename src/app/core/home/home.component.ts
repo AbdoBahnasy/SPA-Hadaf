@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KpiService } from '@app/services/kpi.service';
 import { SharedServiceService } from '@app/services/shared-service.service';
 
 @Component({
@@ -193,13 +194,15 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor(private sharedService: SharedServiceService) {}
+  constructor(private sharedService: SharedServiceService,
+    private kpiService: KpiService,) { }
 
   ngOnInit(): void {
     this.getData();
     this.sharedService.Lang.subscribe((val) => {
       this.lang = val;
     });
+    this.getWorkGroupList()
   }
   dataToRender = [];
   chartrDataToRender = [];
@@ -208,10 +211,14 @@ export class HomeComponent implements OnInit {
   getWorkGroupList() {
     this.sharedService.workGroupData.subscribe((data) => {
       this.WorkGroupList = data;
+      console.log('data retrived', data);
+      if (data.length > 0)
+        this.getMainData(data[0].key);
     });
   }
   getData() {
     this.sharedService.allData.subscribe((data) => {
+      this.dataToRender = [];
       for (let i = 0; i < data.length; i++) {
         if (data[i].kpiTypeId == 1) {
           this.dataToRender.push({
@@ -224,7 +231,8 @@ export class HomeComponent implements OnInit {
           });
         }
         if (
-          data[i].kpiTypeId == 5 ||
+          data[i].kpiTypeId == 4 ||
+
           data[i].kpiTypeId == 5 ||
           data[i].kpiTypeId == 6 ||
           data[i].kpiTypeId == 7 ||
@@ -249,5 +257,22 @@ export class HomeComponent implements OnInit {
         return a.orderIndex - b.orderIndex;
       });
     });
+  }
+  workgroupItem = ""
+  getMainData(val) {
+    // this.showLoader = true;
+    let token = localStorage.getItem('authorizationData');
+    // this.getWorkGroups(token);
+    //this.sharedService.workGroupItem.emit(val)
+    this.kpiService.getKpiData(token, val).subscribe((val: any) => {
+      console.log('data', val);
+      this.sharedService.allData.emit(val.statistics);
+      // this.showLoader = false;      
+    });
+
+    // setTimeout(() => {
+    //   this.sharedService.allData.emit(this.data.statistics);
+    //   console.log('this.test', this.data.statistics);
+    // }, 2000);
   }
 }

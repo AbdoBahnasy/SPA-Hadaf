@@ -1,15 +1,14 @@
 <div class="home_page_content">
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-12">
       <div class="form-group">
         <label for="exampleFormControlSelect1"> select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option *ngFor="let item of WorkGroupList">{{item}}</option>
-         
+        <select class="form-control" id="exampleFormControlSelect1" name="workgroup" #workGroup (change)="getMainData(workGroup.value)">
+          <option *ngFor="let item of WorkGroupList" [value]="item.value">{{item.key}}</option>
         </select>
       </div>
     </div>
-  </div> -->
+  </div>
   <section class="dashboard" id="statistics">
     <h3 class="dashboard_title theme_change">
       {{ "All Calls Statistics" | translate }}

@@ -23,6 +23,8 @@ export class SideNavChartComponent implements OnInit {
   dataToRender = [];
   getData() {
     this.sharedService.allData.subscribe((data) => {
+      this.dataToRender = [];
+
       for (let i = 0; i < data.length; i++) {
         if (data[i].kpiTypeId == 3) {
           this.dataToRender.push({

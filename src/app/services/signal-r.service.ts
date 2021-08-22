@@ -7,7 +7,7 @@ import {
 } from '@microsoft/signalr';
 
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +22,15 @@ export class SignalRService {
   }
 
   public startConnection = () => {
+    let token = localStorage.getItem('authorizationData');
+    // let headers = {
+    //   headers: new HttpHeaders({
+    //     Authorization: 'Bearer ' + token
+    //   }),
+    // };
+    
     this._hubConnection = new HubConnectionBuilder()
-      .withUrl(`${environment.apiUrl}`)
+      .withUrl(`${environment.signalRserver}/hub/notificationhub?access_token=${token}` )
       .build();
     this._hubConnection
       .start()
@@ -37,7 +44,8 @@ export class SignalRService {
   };
 
   public receiveNotification = () => {
-    this._hubConnection.on('receiveNotification', (data) => {
+    this._hubConnection.on('UpdatedDashboardKPIState', (data) => {
+      debugger;
       this.notificationEvents.emit(data);
     });
   };

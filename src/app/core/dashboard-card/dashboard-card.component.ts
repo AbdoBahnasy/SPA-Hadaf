@@ -23,6 +23,7 @@ export class DashboardCardComponent implements OnInit {
   dataToRender = [];
   getData() {
     this.sharedService.allData.subscribe((data) => {
+      this.dataToRender = []
       for (let i = 0; i < data.length; i++) {
         if (data[i].kpiTypeId == 1) {
           this.dataToRender.push({

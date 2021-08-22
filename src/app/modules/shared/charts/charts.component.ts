@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { SharedServiceService } from '@app/services/shared-service.service';
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
@@ -116,7 +116,7 @@ export class ChartsComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private sharedService: SharedServiceService) {}
 
   ngOnInit(): void {
     this.fitContainer = [
@@ -127,5 +127,22 @@ export class ChartsComponent implements OnInit {
       this.containerRef.offsetWidth - 30,
       this.containerRef.offsetHeight - 40,
     ];
+
+    this.getData();
+  }
+  getData() {
+    this.sharedService.charts.subscribe((data) => {
+      this.multi = [];
+      debugger;
+      for (let i = 0; i < data.length; i++) {
+        
+        if (data[i].kpiTypeId == 5) {
+          this.multi.push({
+            name: data[i].name,            
+            series: data[i].data.map((d) => { return { name: d.key, value: d.value } }),
+          });
+        }
+      }      
+    });
   }
 }

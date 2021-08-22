@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:5102/api/v1',
   mainURL: 'http://localhost:5105',
+  signalRserver : "http://localhost:5202"
 };
 
 /*

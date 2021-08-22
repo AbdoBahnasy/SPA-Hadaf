@@ -7,6 +7,8 @@ import { BehaviorSubject } from 'rxjs';
 export class SharedServiceService {
   themeIdentity = new EventEmitter();
   allData = new EventEmitter();
+  charts = new EventEmitter();
+  workGroupItem=new EventEmitter();
   workGroupData = new EventEmitter();
   Lang = new EventEmitter();
   private userSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);

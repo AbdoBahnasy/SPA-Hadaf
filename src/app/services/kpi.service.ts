@@ -18,20 +18,33 @@ export class KpiService {
     headers: new HttpHeaders({
       Authorization: 'Bearer ' + this.token,
       lang: this.lang,
+    }), 
+  };
+  getKpiData(token,workgroupItem) {
+    var headers = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + token,
+      lang: this.lang,
     }),
   };
-  getKpiData(token) {
     this.token = token;
     return this.http.get(
-      `${environment.apiUrl}/Dashboards/statistics`,
-      this.httpOptions
+      `${environment.apiUrl}/Dashboards/statistics?workgroup=${workgroupItem}`,
+      headers
     );
   }
+
   getWorkGroups(token) {
+    var headers = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + token,
+      lang: this.lang,
+    }),
+  };
     this.token = token;
     return this.http.get(
       `${environment.apiUrl}/Statistics/getWorkgroups`,
-      this.httpOptions
+      headers
     );
   }
 }

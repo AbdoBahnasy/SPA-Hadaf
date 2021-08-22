@@ -22,6 +22,7 @@ export class DashboardCardEmployeeComponent implements OnInit {
   //employees
   getData() {
     this.sharedService.allData.subscribe((data) => {
+      this.dataToRender = [];
       for (let i = 0; i < data.length; i++) {
         if (data[i].kpiTypeId == 2) {
           this.dataToRender.push({

@@ -1,10 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
-import {
-  AuthModule,
-  LogLevel,
-  OidcConfigService,
-} from 'angular-auth-oidc-client';
+import { AuthModule } from 'angular-auth-oidc-client';
 
 // https://swimlane.gitbook.io/ngx-charts/
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -37,6 +33,7 @@ import {
   HttpClientModule,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import {ErrorInterceptor} from "../app/core/interceptors/error.interceptor"
 import { createTranslateLoader } from './core/utilities/translate';
 import { ArabicNumbersPipe } from './modules/shared/custom-pips/arabic-numbers.pipe';
 import { LocalizedDatePipe } from './modules/shared/custom-pips/localized-date.pipe';
@@ -46,49 +43,8 @@ import { SpinnersAngularModule } from 'spinners-angular';
 import localeAr from '@angular/common/locales/ar-SA';
 import { LocalizedDateNumbersPipe } from './modules/shared/custom-pips/localized-date-numbers.pipe';
 
-export function configureAuth(
-  oidcConfigService: OidcConfigService,
-  service: AppHeaderComponent
-) {
-  debugger;
-  // if (localStorage.getItem('IsAuthorized') == 'true') {
-  //   window.location.href = window.location.origin + '/home';
-  //   return;
-  // }
 
-  if (window.location.hash && !localStorage.getItem('authorizationData')) {
-    service.AuthorizedCallback();
-    return;
-  }
-
-  if (
-    location.href.indexOf('#') != -1 &&
-    !localStorage.getItem('authorizationData')
-  ) {
-    service.Authorize();
-    return;
-  }
-
-  // return () =>
-  //   oidcConfigService.withConfig({
-  //     stsServer: 'http://localhost:5105',//+ '/connect/authorize',
-  //     responseType: 'implicit',
-  //     redirectUrl: window.location.origin + '/',
-  //     postLogoutRedirectUri: window.location.origin + '/',
-  //     clientId: 'js',
-  //     scope: 'openid profile dashboards dashboards.signalrhub',
-
-  //     // silentRenew: true,
-  //     // silentRenewUrl: `${window.location.origin}/silent-renew.html`,
-  //     logLevel: LogLevel.Debug,
-  //   });
-}
 const routes: Routes = [
-  // {
-  //   path: 'login',
-  //   component: IdentityLayoutComponent,
-  //   children: [{ path: '', component: LoginComponent }],
-  // },
   {
     path: 'home',
     component: LayoutComponent,
@@ -143,21 +99,14 @@ registerLocaleData(localeAr);
 
   providers: [
     DatePipe,
-    { provide: LOCALE_ID, useValue: 'fr-FR' },
-    OidcConfigService,
-    AppHeaderComponent,
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HeaderInterceptor,
-    //   multi: true,
-    // },
+    { provide: LOCALE_ID, useValue: 'en-US' },
+    
     {
-      provide: APP_INITIALIZER,
-      useFactory: configureAuth,
-      deps: [OidcConfigService, AppHeaderComponent],
-      multi: true,
+      provide: HTTP_INTERCEPTORS,
+     useClass:ErrorInterceptor,
+     multi:true
     },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
