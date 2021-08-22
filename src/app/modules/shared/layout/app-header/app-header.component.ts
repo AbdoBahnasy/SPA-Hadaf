@@ -36,7 +36,7 @@ export class AppHeaderComponent implements OnInit {
       this.themeIdentity = result;
     });
     this.getWorkGroups(localStorage.getItem('authorizationData'));
-    this.startSyncingData()
+    this.startSyncingData();
 
     // if (window.location.hash && !localStorage.getItem('authorizationData')) {
     // }
@@ -46,7 +46,7 @@ export class AppHeaderComponent implements OnInit {
     this.signalR.startConnection();
     this.signalR.notificationEvents.subscribe((data) => {
       debugger;
-      console.log(data)
+      console.log(data);
       // this.getWorkGroups(localStorage.getItem('authorizationData'))
       this.getMainData(data.workgroup);
     });
@@ -90,7 +90,7 @@ export class AppHeaderComponent implements OnInit {
       head.appendChild(link);
     }
   }
-  workgroupItem = ""
+  workgroupItem = '';
   getMainData(workgroup) {
     // this.showLoader = true;
     let token = localStorage.getItem('authorizationData');
@@ -100,7 +100,7 @@ export class AppHeaderComponent implements OnInit {
       console.log('data', val);
       this.sharedService.charts.emit(val.charts);
       this.sharedService.allData.emit(val.statistics);
-      // this.showLoader = false;      
+      // this.showLoader = false;
     });
 
     //  setTimeout(() => {
@@ -116,7 +116,6 @@ export class AppHeaderComponent implements OnInit {
       this.woekGroups = val;
       this.sharedService.workGroupData.emit(this.woekGroups);
       this.showLoader = false;
-
     });
   }
 }

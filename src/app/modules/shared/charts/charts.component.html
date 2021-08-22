@@ -3,21 +3,20 @@
     [view]="fitContainer2"
     [scheme]="colorScheme"
     [timeline]="false"
-    [results]="multi"
+    [results]="chartdata"
     [gradient]="gradient"
     [xAxis]="showXAxis"
     [yAxis]="showYAxis"
     [legend]="showLegend"
     [showXAxisLabel]="showXAxisLabel"
     [showYAxisLabel]="showYAxisLabel"
-   
   >
   </ngx-charts-line-chart>
 
   <ngx-charts-pie-chart
     [view]="fitContainer"
     [scheme]="colorScheme"
-    [results]="messageData"
+    [results]="chartdata"
     [gradient]="gradient"
     [legend]="showLegend"
     [legendPosition]="legendPosition"
@@ -27,7 +26,7 @@
   <ngx-charts-bar-vertical
     [view]="fitContainer"
     [scheme]="colorScheme"
-    [results]="surveyData"
+    [results]="chartdata"
     [gradient]="gradient"
     [xAxis]="showXAxis"
     [yAxis]="showYAxis"

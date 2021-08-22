@@ -8,6 +8,8 @@ import { SharedServiceService } from '@app/services/shared-service.service';
 export class ChartsComponent implements OnInit {
   @Input('chartType') chartType;
   @Input('containerRef') containerRef;
+  @Input('data') data;
+  @Input('chartName') chartName;
 
   showXAxis = true;
   showYAxis = true;
@@ -18,103 +20,102 @@ export class ChartsComponent implements OnInit {
   showYAxisLabel = false;
   fitContainer: any[] = [];
   fitContainer2: any[] = [];
-
+  chartdata = [];
   timeline = false;
+  fake = [
+    {
+      name: 'green',
+      series: [
+        {
+          name: 'Aug',
+          value: 14,
+        },
+        {
+          name: 'Sep',
+          value: 35,
+        },
+        {
+          name: 'Oct',
+          value: 4,
+        },
+        {
+          name: 'Nov',
+          value: 17,
+        },
+        {
+          name: 'Dec',
+          value: 14,
+        },
+        {
+          name: 'Jan',
+          value: 35,
+        },
+      ],
+    },
+
+    {
+      name: 'yellow',
+      series: [
+        {
+          name: 'Aug',
+          value: 364,
+        },
+        {
+          name: 'Sep',
+          value: 412,
+        },
+        {
+          name: 'Oct',
+          value: 437,
+        },
+        {
+          name: 'Nov',
+          value: 437,
+        },
+        {
+          name: 'Dec',
+          value: 364,
+        },
+        {
+          name: 'Jan',
+          value: 412,
+        },
+      ],
+    },
+    {
+      name: 'red',
+      series: [
+        {
+          name: 'Aug',
+          value: 168,
+        },
+        {
+          name: 'Sep',
+          value: 343,
+        },
+        {
+          name: 'Oct',
+          value: 512,
+        },
+        {
+          name: 'Nov',
+          value: 291,
+        },
+        {
+          name: 'Dec',
+          value: 168,
+        },
+        {
+          name: 'Jan',
+          value: 343,
+        },
+      ],
+    },
+  ];
   colorScheme = {
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB'],
   };
   showLabels = false;
-  surveyData = [
-    { name: 'test01', value: 105000 },
-    { name: 'test02', value: 55000 },
-    { name: 'test03', value: 15000 },
-    { name: 'test04', value: 150000 },
-    { name: 'test05', value: 20000 },
-    { name: 'test06', value: 10000 },
-    { name: 'test07', value: 50000 },
-  ];
-  messageData = [
-    {
-      name: 'France',
-      value: 36745,
-      extra: {
-        code: 'fr',
-      },
-    },
-    {
-      name: 'United Kingdom',
-      value: 36240,
-      extra: {
-        code: 'uk',
-      },
-    },
-    {
-      name: 'Spain',
-      value: 33000,
-      extra: {
-        code: 'es',
-      },
-    },
-    {
-      name: 'Italy',
-      value: 35800,
-      extra: {
-        code: 'it',
-      },
-    },
-  ];
-  multi = [
-    {
-      name: 'Jordan',
-      series: [
-        {
-          value: 2247,
-          name: '2016-09-13',
-        },
-        {
-          value: 5176,
-          name: '2016-09-20',
-        },
-        {
-          value: 6962,
-          name: '2016-09-16',
-        },
-        {
-          value: 3893,
-          name: '2016-09-14',
-        },
-        {
-          value: 3706,
-          name: '2016-09-14',
-        },
-      ],
-    },
-    {
-      name: 'Colombia',
-      series: [
-        {
-          value: 2247,
-          name: '2016-09-13',
-        },
-        {
-          value: 5176,
-          name: '2016-09-20',
-        },
-        {
-          value: 6962,
-          name: '2016-09-16',
-        },
-        {
-          value: 3893,
-          name: '2016-09-14',
-        },
-        {
-          value: 3706,
-          name: '2016-09-14',
-        },
-      ],
-    },
-  ];
 
   constructor(private sharedService: SharedServiceService) {}
 
@@ -131,18 +132,24 @@ export class ChartsComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.sharedService.charts.subscribe((data) => {
-      this.multi = [];
-      debugger;
-      for (let i = 0; i < data.length; i++) {
-        
-        if (data[i].kpiTypeId == 5) {
-          this.multi.push({
-            name: data[i].name,            
-            series: data[i].data.map((d) => { return { name: d.key, value: d.value } }),
-          });
-        }
-      }      
-    });
+    if (this.chartType == 5) {
+      this.chartdata = [];
+      for (let i = 0; i < this.data.length; i++) {
+        this.chartdata.push({
+          name: this.chartName,
+          series: this.data[i].map((d) => {
+            return { name: d.key, value: d.value };
+          }),
+        });
+      }
+    } else {
+      this.chartdata = [];
+      for (let i = 0; i < this.data.length; i++) {
+        this.chartdata.push({
+          name: this.data[i].key,
+          value: this.data[i].value,
+        });
+      }
+    }
   }
 }
