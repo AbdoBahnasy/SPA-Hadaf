@@ -232,7 +232,6 @@ export class HomeComponent implements OnInit {
         }
         if (
           data[i].kpiTypeId == 4 ||
-
           data[i].kpiTypeId == 5 ||
           data[i].kpiTypeId == 6 ||
           data[i].kpiTypeId == 7 ||
