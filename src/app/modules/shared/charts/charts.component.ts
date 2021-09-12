@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { SharedServiceService } from '@app/services/shared-service.service';
 @Component({
   selector: 'app-charts',
@@ -22,96 +22,7 @@ export class ChartsComponent implements OnInit {
   fitContainer2: any[] = [];
   chartdata = [];
   timeline = false;
-  fake = [
-    {
-      name: 'green',
-      series: [
-        {
-          name: 'Aug',
-          value: 14,
-        },
-        {
-          name: 'Sep',
-          value: 35,
-        },
-        {
-          name: 'Oct',
-          value: 4,
-        },
-        {
-          name: 'Nov',
-          value: 17,
-        },
-        {
-          name: 'Dec',
-          value: 14,
-        },
-        {
-          name: 'Jan',
-          value: 35,
-        },
-      ],
-    },
-
-    {
-      name: 'yellow',
-      series: [
-        {
-          name: 'Aug',
-          value: 364,
-        },
-        {
-          name: 'Sep',
-          value: 412,
-        },
-        {
-          name: 'Oct',
-          value: 437,
-        },
-        {
-          name: 'Nov',
-          value: 437,
-        },
-        {
-          name: 'Dec',
-          value: 364,
-        },
-        {
-          name: 'Jan',
-          value: 412,
-        },
-      ],
-    },
-    {
-      name: 'red',
-      series: [
-        {
-          name: 'Aug',
-          value: 168,
-        },
-        {
-          name: 'Sep',
-          value: 343,
-        },
-        {
-          name: 'Oct',
-          value: 512,
-        },
-        {
-          name: 'Nov',
-          value: 291,
-        },
-        {
-          name: 'Dec',
-          value: 168,
-        },
-        {
-          name: 'Jan',
-          value: 343,
-        },
-      ],
-    },
-  ];
+ 
   colorScheme = {
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB'],
   };
@@ -121,29 +32,28 @@ export class ChartsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fitContainer = [
-      this.containerRef.offsetWidth - 20,
-      this.containerRef.offsetHeight - 40,
-    ];
-    this.fitContainer2 = [
-      this.containerRef.offsetWidth - 30,
-      this.containerRef.offsetHeight - 40,
-    ];
-
+     this.containerRef.offsetWidth - 20,
+     this.containerRef.offsetHeight - 40,
+   ];
+   this.fitContainer2 = [
+     this.containerRef.offsetWidth - 30,
+     this.containerRef.offsetHeight - 40,
+   ];
+    this.chartdata = [];
     this.getData();
   }
+
   getData() {
+
+    debugger;
     if (this.chartType == 5) {
-      this.chartdata = [];
-      for (let i = 0; i < this.data.length; i++) {
-        this.chartdata.push({
-          name: this.chartName,
-          series: this.data[i].map((d) => {
-            return { name: d.key, value: d.value };
-          }),
-        });
-      }
+      this.chartdata.push({
+        name: this.chartName,
+        series: this.data.map((d) => {
+          return { name: d.key, value: d.value };
+        }),
+      });
     } else {
-      this.chartdata = [];
       for (let i = 0; i < this.data.length; i++) {
         this.chartdata.push({
           name: this.data[i].key,

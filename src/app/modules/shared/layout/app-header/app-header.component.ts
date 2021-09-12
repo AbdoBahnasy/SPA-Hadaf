@@ -39,13 +39,13 @@ export class AppHeaderComponent implements OnInit {
     this.startSyncingData();
 
     // if (window.location.hash && !localStorage.getItem('authorizationData')) {
+      
     // }
   }
 
   startSyncingData() {
     this.signalR.startConnection();
     this.signalR.notificationEvents.subscribe((data) => {
-      debugger;
       console.log(data);
       // this.getWorkGroups(localStorage.getItem('authorizationData'))
       this.getMainData(data.workgroup);
@@ -93,15 +93,23 @@ export class AppHeaderComponent implements OnInit {
   workgroupItem = '';
   getMainData(workgroup) {
     // this.showLoader = true;
+    
     let token = localStorage.getItem('authorizationData');
     // this.getWorkGroups(token);
-
-    this.kpiService.getKpiData(token, workgroup).subscribe((val: any) => {
-      console.log('data', val);
-      this.sharedService.charts.emit(val.charts);
-      this.sharedService.allData.emit(val.statistics);
-      // this.showLoader = false;
-    });
+    let workGroupItem = this.sharedService.workGroupListItem;
+   
+    if(workgroup === workGroupItem){
+     
+      this.kpiService.getKpiData(token, workgroup).subscribe((val: any) => {
+        console.log('data', val);
+        this.sharedService.charts.emit(val.charts);
+        this.sharedService.allData.emit(val.statistics);
+        // this.showLoader = false;
+      });
+    }else{
+      return;
+    }
+   
 
     //  setTimeout(() => {
     //   this.sharedService.allData.emit(this.data.statistics);

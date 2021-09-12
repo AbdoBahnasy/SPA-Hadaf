@@ -9,6 +9,7 @@ export class SharedServiceService {
   allData = new EventEmitter();
   charts = new EventEmitter();
   workGroupItem=new EventEmitter();
+  workGroupListItem = 'IT-Business';
   workGroupData = new EventEmitter();
   Lang = new EventEmitter();
   private userSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);

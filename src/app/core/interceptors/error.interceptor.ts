@@ -49,6 +49,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   handle401Error(req: HttpRequest<any>, next: HttpHandler) {
       console.log('req',req)
+      debugger;
       if (window.location.hash && !localStorage.getItem('authorizationData')) {
         this.AuthorizedCallback();
       }else{
@@ -98,7 +99,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           console.log(
             'AuthorizedCallback state and nonce validated, returning access token'
           );
-          window.location.href =window.location.origin + '/home'
+          window.location.href =window.location.origin 
         }
       }
     }
@@ -152,7 +153,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     localStorage.removeItem('authorizationData');
     let authorizationUrl = environment.mainURL + '/connect/authorize';
     let client_id = 'js';
-    let redirect_uri = location.origin + '/home';
+    let redirect_uri = location.origin + '/';
     let response_type = 'id_token token';
     let scope = 'openid profile dashboards dashboards.signalrhub';
     let nonce = 'N' + Math.random() + '' + Date.now();

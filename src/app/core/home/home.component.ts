@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
 
   workgroupItem = '';
   getMainData(val) {
+    this.sharedService.workGroupListItem = val
     // this.showLoader = true;
     let token = localStorage.getItem('authorizationData');
     // this.getWorkGroups(token);
@@ -88,6 +89,7 @@ export class HomeComponent implements OnInit {
     this.kpiService.getKpiData(token, val).subscribe((val: any) => {
       console.log('data', val);
       this.sharedService.allData.emit(val.statistics);
+      this.sharedService.charts.emit(val.charts);
       // this.showLoader = false;
     });
 

@@ -46,11 +46,11 @@ import { LocalizedDateNumbersPipe } from './modules/shared/custom-pips/localized
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: LayoutComponent,
     children: [{ path: '', component: HomeComponent }],
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+ // { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 registerLocaleData(localeAr);
 @NgModule({

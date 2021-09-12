@@ -30,18 +30,18 @@
             />
           </div>
 
-          <div class="card_desc theme_change">{{ "TOTAL" | translate }}</div>
+          <div class="card_desc theme_change">{{ data?.name }}</div>
           <div
             *ngIf="lang == 'ar-SA'"
             class="card_sm_desc theme_change text-truncate"
           >
-            {{ data?.name }}
+            {{ data?.brief }}
           </div>
           <div
             *ngIf="lang == 'en-US'"
             class="card_sm_desc theme_change text-truncate"
           >
-            {{ data?.name }}
+            {{ data?.brief }}
           </div>
         </div>
         <div class="col-12 col-lg-5">

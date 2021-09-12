@@ -13,18 +13,18 @@
           <div class="card_title theme_change text-truncate">
             {{ data?.readValue | arabicNumbers }}
           </div>
-          <div class="card_desc theme_change">{{ "TOTAL" | translate }}</div>
+          <div class="card_desc theme_change">{{ data?.name }}</div>
           <div
             class="card_sm_desc theme_change text-truncate"
             *ngIf="lang == 'en-US'"
           >
-            {{ data?.name }}
+            {{ data?.brief }}
           </div>
           <div
             class="card_sm_desc theme_change text-truncate"
             *ngIf="lang == 'ar-SA'"
           >
-            {{ data?.name }}
+            {{ data?.brief }}
           </div>
         </div>
         <div class="col-12 col-lg-4">

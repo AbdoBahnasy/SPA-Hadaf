@@ -45,7 +45,6 @@ export class SignalRService {
 
   public receiveNotification = () => {
     this._hubConnection.on('UpdatedDashboardKPIState', (data) => {
-      debugger;
       this.notificationEvents.emit(data);
     });
   };
