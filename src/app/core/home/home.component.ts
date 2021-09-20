@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
       });
     });
     this.sharedService.charts.subscribe((data) => {
-      this.dataToRender = [];
+      this.chartrDataToRender = [];
       for (let i = 0; i < data.length; i++) {
         if (data && data.length > 0) {
           this.chartrDataToRender.push({

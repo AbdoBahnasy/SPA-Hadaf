@@ -276,7 +276,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 .dark .dashboard_card,
 .dark .chart_card,
 .dark .home_page_content {
-  background-color: #2e2f3a !important;
+  background-color: #000 !important;
 }
 .dark .ngx-charts text {
   fill: #fff !important;
@@ -284,6 +284,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 .dark .dashboard_card,
 .dark .chart_card {
   border-color: #2e2f3a !important;
+  background-color: #2e2f3a !important;
 }
 .dark .change_theme {
   fill: transparent !important;

@@ -44,8 +44,7 @@ export class ChartsComponent implements OnInit {
   }
 
   getData() {
-
-    debugger;
+    
     if (this.chartType == 5) {
       this.chartdata.push({
         name: this.chartName,
