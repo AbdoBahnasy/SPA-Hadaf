@@ -28,7 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         const errorMessage = this.getErrorMessage(err);
         switch (err instanceof HttpErrorResponse && err.status) {
           case 401:
-              debugger;
+              // debugger;
             this.handle401Error(request, next);
           case 404:
             this.handle400Error(err);        
@@ -48,8 +48,8 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   handle401Error(req: HttpRequest<any>, next: HttpHandler) {
-      console.log('req',req)
-      debugger;
+      // console.log('req',req)
+      // debugger;
       if (window.location.hash && !localStorage.getItem('authorizationData')) {
         this.AuthorizedCallback();
       }else{
@@ -58,7 +58,7 @@ export class ErrorInterceptor implements HttpInterceptor {
  
   }
   public AuthorizedCallback() {
-    debugger;
+    // debugger;
     
     let hash = window.location.hash.substr(1);
 
@@ -148,7 +148,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     localStorage.setItem('IsAuthorized', 'true');
   }
    Authorize() {
-    debugger;
+    // debugger;
     
     localStorage.removeItem('authorizationData');
     let authorizationUrl = environment.mainURL + '/connect/authorize';

@@ -8,7 +8,12 @@ export const environment = {
   mainURL: 'http://localhost:5105',
   signalRserver : "http://localhost:5202"
 };
-
+// export const environment = {
+//   production: false,
+//   apiUrl: 'https://sehatydbapi.2p-ccbu.com/api/v1',
+//   mainURL: 'https://sehatydbid.2p-ccbu.com',
+//   signalRserver : "https://sehatydbsi.2p-ccbu.com"
+// };
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
