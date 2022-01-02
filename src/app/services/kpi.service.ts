@@ -17,14 +17,14 @@ export class KpiService {
   httpOptions = {
     headers: new HttpHeaders({
       Authorization: 'Bearer ' + this.token,
-      lang: this.lang,
+      "Accept-Language": this.lang,
     }), 
   };
   getKpiData(token,workgroupItem) {
     var headers = {
     headers: new HttpHeaders({
       Authorization: 'Bearer ' + token,
-      lang: this.lang,
+      "Accept-Language": this.lang,
     }),
   };
     this.token = token;

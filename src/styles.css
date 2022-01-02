@@ -327,3 +327,7 @@ sa-spinner-circular svg {
   height: 80% !important;
 } */
 /* end dark theme */
+.dashboard_card.col-4.ml-2, .dashboard_card.col-4.mx-2,.dashboard_card.col-4.mr-2, .dashboard_card.col-4.mx-2{
+  margin-right:0 !important;
+  margin-left:0 !important
+}

@@ -46,9 +46,10 @@ export class AppHeaderComponent implements OnInit {
   startSyncingData() {
     this.signalR.startConnection();
     this.signalR.notificationEvents.subscribe((data) => {
-      console.log(data);
+      //console.log(data);
       // this.getWorkGroups(localStorage.getItem('authorizationData'))
-      this.getMainData(data.workgroup);
+      if(this.sharedService.workGroupListItem.toLowerCase() == data.workgroup.toLowerCase())
+        this.getMainData(data.workgroup);
     });
   }
   login() {
@@ -101,7 +102,7 @@ export class AppHeaderComponent implements OnInit {
     if(workgroup === workGroupItem){
      
       this.kpiService.getKpiData(token, workgroup).subscribe((val: any) => {
-        console.log('data', val);
+        //console.log('data', val);
         this.sharedService.charts.emit(val.charts);
         this.sharedService.allData.emit(val.statistics);
         // this.showLoader = false;

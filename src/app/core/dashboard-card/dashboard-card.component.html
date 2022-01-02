@@ -30,27 +30,7 @@
         <div class="col-12 col-lg-4">
           <!--  -->
           <i class="fa fa-{{data.icon}}"></i>
-          <img
-            src="../../../assets/images/recievedcall.svg"
-            class="img-fluid"
          
-            *ngIf="data?.icon === phone"
-          />
-          <img
-            src="../../../assets/images/incomingcall.svg"
-            class="img-fluid"
-            *ngIf="data?.colour === 1"
-          />
-          <img
-            src="../../../assets/images/waitingcall.svg"
-            class="img-fluid"
-            *ngIf="data?.colour === 4"
-          />
-          <img
-            src="../../../assets/images/missedcall.svg"
-            class="img-fluid"
-            *ngIf="data?.colour === 3"
-          />
         </div>
       </div>
     </div>

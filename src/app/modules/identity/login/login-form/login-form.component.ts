@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent implements OnInit {
-  title = 'MINIStRY OF TRANSPORT';
+  title = '2P Dashboard';
   loginForm: FormGroup;
   constructor(private router: Router) {}
 

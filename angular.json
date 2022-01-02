@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "minsitry-of-transport": {
+    "realtime-dashboard": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/minsitry-of-transport",
+            "outputPath": "dist/realtime-dashboard",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "minsitry-of-transport:build"
+            "browserTarget": "realtime-dashboard:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "minsitry-of-transport:build:production"
+              "browserTarget": "realtime-dashboard:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "minsitry-of-transport:build"
+            "browserTarget": "realtime-dashboard:build"
           }
         },
         "test": {
@@ -125,18 +125,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "minsitry-of-transport:serve"
+            "devServerTarget": "realtime-dashboard:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "minsitry-of-transport:serve:production"
+              "devServerTarget": "realtime-dashboard:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "minsitry-of-transport",
+  "defaultProject": "realtime-dashboard",
   "cli": {
     "analytics": false
   }
