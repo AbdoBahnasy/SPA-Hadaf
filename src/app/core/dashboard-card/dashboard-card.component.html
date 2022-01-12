@@ -1,10 +1,11 @@
 <!-- bg--blue/bg--red/bg--orange/bg--bluesky -->
 
 <div class="row">
-  <div
-    class="dashboard_card col ml-2 mr-2"
-    *ngFor="let data of callsData; let i = index"
-    [ngStyle]="{ background: data?.color }"
+  <div class=" col-3 "
+  *ngFor="let data of callsData; let i = index">
+  <div class="dashboard_card"
+    
+    [ngStyle]="{ background: data?.color , 'margin-left':'1px' , 'margin-right':'1px'}"
   >
     <div class="p-3">
       <!-- row-reverse -->
@@ -35,4 +36,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

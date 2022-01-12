@@ -1,58 +1,33 @@
 <div class="row">
-  <div class="col-4 " *ngFor="let data of employees; let i = index">
-  <div
-    class="dashboard_card "
-    
-  >
-    <div class="p-3">
-      <!-- row-reverse -->
-      <div class="row justify-content-between align-items-center">
-        <div class="col-12 col-lg-7">
-          <div class="card_title theme_change">
-            <img
-              src="../../../assets/images/employee001.svg"
-              class="img-fluid"
-              *ngIf="data?.colour === 1"
-            />
-            <img
-              src="../../../assets/images/employee002.svg"
-              class="img-fluid"
-              *ngIf="data?.colour === 2"
-            />
-            <img
-              src="../../../assets/images/employee003.svg"
-              class="img-fluid"
-              *ngIf="data?.colour === 3"
-            />
-            <img
-              src="../../../assets/images/employee004.svg"
-              class="img-fluid"
-              *ngIf="data?.colour === 4"
-            />
-          </div>
+  <div class="col-3 " *ngFor="let data of employees; let i = index">
+    <div class="dashboard_card ">
+      <div class="p-3">
+        <!-- row-reverse -->
+        <div class="row justify-content-between align-items-center">
+          <div class="col-12 col-lg-7">
+            <div class="card_title theme_change">
+              <img src="../../../assets/images/employee001.svg" class="img-fluid" *ngIf="data?.colour === 1" />
+              <img src="../../../assets/images/employee002.svg" class="img-fluid" *ngIf="data?.colour === 2" />
+              <img src="../../../assets/images/employee003.svg" class="img-fluid" *ngIf="data?.colour === 3" />
+              <img src="../../../assets/images/employee004.svg" class="img-fluid" *ngIf="data?.colour === 4" />
+            </div>
 
-          <div class="card_desc theme_change">{{ data?.name }}</div>
-          <div
-            *ngIf="lang == 'ar-SA'"
-            class="card_sm_desc theme_change text-truncate"
-          >
-            {{ data?.brief }}
+            <div class="card_desc theme_change">{{ data?.name }}</div>
+            <div *ngIf="lang == 'ar-SA'" class="card_sm_desc theme_change text-truncate">
+              {{ data?.brief }}
+            </div>
+            <div *ngIf="lang == 'en-US'" class="card_sm_desc theme_change text-truncate">
+              {{ data?.brief }}
+            </div>
           </div>
-          <div
-            *ngIf="lang == 'en-US'"
-            class="card_sm_desc theme_change text-truncate"
-          >
-            {{ data?.brief }}
-          </div>
-        </div>
-        <div class="col-12 col-lg-5">
-          <!--  -->
-          <div class="card_title theme_change text-truncate">
-            {{ data?.readValue }}
+          <div class="col-12 col-lg-5">
+            <!--  -->
+            <div class="card_title theme_change text-truncate">
+              {{ data?.readValue }}
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
