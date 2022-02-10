@@ -46,10 +46,14 @@ export class AppHeaderComponent implements OnInit {
   startSyncingData() {
     this.signalR.startConnection();
     this.signalR.notificationEvents.subscribe((data) => {
-      //console.log(data);
+      // console.log(data);
+     
       // this.getWorkGroups(localStorage.getItem('authorizationData'))
       if(this.sharedService.workGroupListItem.toLowerCase() == data.workgroup.toLowerCase())
+      {
+        debugger;
         this.getMainData(data.workgroup);
+      }
     });
   }
   login() {
